@@ -64,3 +64,37 @@ def eliminar_vivero(request, pk):
     vivero = Vivero.objects.get(pk=pk)
     vivero.delete()
     return redirect('listar_viveros')
+
+# productores/views.py
+from .models import Labor
+from .forms import LaborForm
+
+def listar_labores(request):
+    labores = Labor.objects.all()
+    return render(request, 'productores/listar_labores.html', {'labores': labores})
+
+def registrar_labor(request):
+    if request.method == 'POST':
+        form = LaborForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_labores')
+    else:
+        form = LaborForm()
+    return render(request, 'productores/registrar_labor.html', {'form': form})
+
+def editar_labor(request, pk):
+    labor = Labor.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = LaborForm(request.POST, instance=labor)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_labores')
+    else:
+        form = LaborForm(instance=labor)
+    return render(request, 'productores/editar_labor.html', {'form': form, 'labor': labor})
+
+def eliminar_labor(request, pk):
+    labor = Labor.objects.get(pk=pk)
+    labor.delete()
+    return redirect('listar_labores')
