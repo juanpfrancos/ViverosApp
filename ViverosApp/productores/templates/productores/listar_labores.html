@@ -1,0 +1,25 @@
+<h1>Lista de Labores</h1>
+<a href="{% url 'registrar_labor' %}">Registrar Labor</a>
+<table>
+    <thead>
+        <tr>
+            <th>Vivero</th>
+            <th>Fecha</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for labor in labores %}
+        <tr>
+            <td>{{ labor.vivero.codigo }}</td>
+            <td>{{ labor.fecha }}</td>
+            <td>{{ labor.descripcion }}</td>
+            <td>
+                <a href="{% url 'editar_labor' labor.pk %}">Editar</a>
+                <a href="{% url 'eliminar_labor' labor.pk %}">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
