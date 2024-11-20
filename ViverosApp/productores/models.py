@@ -28,3 +28,12 @@ class Vivero(models.Model):
 
     def __str__(self):
         return f"Vivero {self.codigo} - {self.tipo_cultivo}"
+
+
+class Labor(models.Model):
+    fecha = models.DateField()
+    descripcion = models.TextField()
+    vivero = models.ForeignKey(Vivero, related_name='labores', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Labor en {self.vivero.codigo} - {self.fecha}: {self.descripcion[:30]}"
