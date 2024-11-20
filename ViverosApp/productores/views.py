@@ -1,7 +1,8 @@
 # productores/views.py
 from django.shortcuts import render, redirect
-from .models import Productor, Finca, Vivero
-from .forms import ProductorForm, FincaForm, ViveroForm
+from .models import Productor, Finca, Vivero, ProductoControl, ProductoControlHongo, ProductoControlPlaga, ProductoControlFertilizante
+from .forms import ProductorForm, FincaForm, ViveroForm, ProductoControlForm, ProductoControlHongoForm, ProductoControlPlagaForm, ProductoControlFertilizanteForm
+
 
 # Gestión de Fincas
 def listar_fincas(request):
@@ -98,3 +99,36 @@ def eliminar_labor(request, pk):
     labor = Labor.objects.get(pk=pk)
     labor.delete()
     return redirect('listar_labores')
+
+# productores/views.py
+
+# Productos de Control
+def listar_productos_control(request):
+    productos = ProductoControl.objects.all()
+    return render(request, 'productores/listar_productos_control.html', {'productos': productos})
+
+def registrar_producto_control(request):
+    if request.method == 'POST':
+        form = ProductoControlForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_productos_control')
+    else:
+        form = ProductoControlForm()
+    return render(request, 'productores/registrar_producto_control.html', {'form': form})
+
+def editar_producto_control(request, pk):
+    producto = ProductoControl.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = ProductoControlForm(request.POST, instance=producto)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_productos_control')
+    else:
+        form = ProductoControlForm(instance=producto)
+    return render(request, 'productores/editar_producto_control.html', {'form': form, 'producto': producto})
+
+def eliminar_producto_control(request, pk):
+    producto = ProductoControl.objects.get(pk=pk)
+    producto.delete()
+    return redirect('listar_productos_control')
