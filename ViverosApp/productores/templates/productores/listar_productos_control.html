@@ -1,0 +1,29 @@
+<h1>Lista de Productos de Control</h1>
+<a href="{% url 'registrar_producto_control' %}">Registrar Producto</a>
+<table>
+    <thead>
+        <tr>
+            <th>Registro ICA</th>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>Frecuencia Aplicación</th>
+            <th>Valor</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for producto in productos %}
+        <tr>
+            <td>{{ producto.registro_ica }}</td>
+            <td>{{ producto.nombre }}</td>
+            <td>{{ producto.get_tipo_display }}</td>
+            <td>{{ producto.frecuencia_aplicacion }}</td>
+            <td>{{ producto.valor }}</td>
+            <td>
+                <a href="{% url 'editar_producto_control' producto.pk %}">Editar</a>
+                <a href="{% url 'eliminar_producto_control' producto.pk %}">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
