@@ -1,0 +1,29 @@
+<h1>Lista de Productores</h1>
+<a href="{% url 'registrar_productor' %}">Registrar Productor</a>
+<table>
+    <thead>
+        <tr>
+            <th>Documento</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Teléfono</th>
+            <th>Correo</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for productor in productores %}
+        <tr>
+            <td>{{ productor.documento_identidad }}</td>
+            <td>{{ productor.nombre }}</td>
+            <td>{{ productor.apellido }}</td>
+            <td>{{ productor.telefono }}</td>
+            <td>{{ productor.correo }}</td>
+            <td>
+                <a href="{% url 'editar_productor' productor.pk %}">Editar</a>
+                <a href="{% url 'eliminar_productor' productor.pk %}">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
