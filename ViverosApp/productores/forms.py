@@ -1,6 +1,6 @@
 # productores/forms.py
 from django import forms
-from .models import Finca, Vivero, Labor,ProductoControl, ProductoControlHongo, ProductoControlPlaga, ProductoControlFertilizante
+from .models import Productor, Finca, Vivero, Labor,ProductoControl, ProductoControlHongo, ProductoControlPlaga, ProductoControlFertilizante
 class FincaForm(forms.ModelForm):
     class Meta:
         model = Finca
@@ -17,7 +17,10 @@ class LaborForm(forms.ModelForm):
         model = Labor
         fields = ['fecha', 'descripcion', 'vivero']
 
-
+class ProductorForm(forms.ModelForm):
+    class Meta:
+        model = Productor
+        fields = ['documento_identidad', 'nombre', 'apellido', 'telefono', 'correo']
 
 class ProductoControlForm(forms.ModelForm):
     class Meta:
