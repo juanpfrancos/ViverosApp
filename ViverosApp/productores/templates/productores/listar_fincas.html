@@ -1,0 +1,25 @@
+<h1>Lista de Fincas</h1>
+<a href="{% url 'registrar_finca' %}">Registrar Finca</a>
+<table>
+    <thead>
+        <tr>
+            <th>Número Catastro</th>
+            <th>Municipio</th>
+            <th>Productor</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for finca in fincas %}
+        <tr>
+            <td>{{ finca.numero_catastro }}</td>
+            <td>{{ finca.municipio }}</td>
+            <td>{{ finca.productor }}</td>
+            <td>
+                <a href="{% url 'editar_finca' finca.pk %}">Editar</a>
+                <a href="{% url 'eliminar_finca' finca.pk %}">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

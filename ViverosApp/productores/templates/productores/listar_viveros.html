@@ -1,0 +1,25 @@
+<h1>Lista de Viveros</h1>
+<a href="{% url 'registrar_vivero' %}">Registrar Vivero</a>
+<table>
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Tipo Cultivo</th>
+            <th>Finca</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for vivero in viveros %}
+        <tr>
+            <td>{{ vivero.codigo }}</td>
+            <td>{{ vivero.tipo_cultivo }}</td>
+            <td>{{ vivero.finca }}</td>
+            <td>
+                <a href="{% url 'editar_vivero' vivero.pk %}">Editar</a>
+                <a href="{% url 'eliminar_vivero' vivero.pk %}">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
